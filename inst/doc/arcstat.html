@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Arc length as a statistical functional</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Arc length as a statistical functional</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(arcstat)</span></code></pre></div>
+<div id="the-idea" class="section level2">
+<h2>The idea</h2>
+<p>Most statistical functionals summarise a curve by its height
+somewhere: a moment, a quantile, a density value. Arc length summarises
+it by how far you travel along it. For a quantile function <span class="math inline">\(Q\)</span> on <span class="math inline">\((0,1)\)</span> the arc length is</p>
+<p><span class="math display">\[\int_0^1 \sqrt{1 + Q&#39;(u)^2}\,
+du,\]</span></p>
+<p>which is large when the curve is steep somewhere and small when it is
+flat. It is a measure of curve complexity rather than of location or
+spread, and it responds to structure that the usual functionals average
+away.</p>
+<p>This package collects the arc-length constructions: a goodness-of-fit
+test, a family of distributions indexed by the shape of the quantile
+density, an equivalence family, the characteristic-function version, and
+a Bayesian test.</p>
+</div>
+<div id="arc-length-of-a-quantile-family" class="section level2">
+<h2>Arc length of a quantile family</h2>
+<p>The <code>arcq</code> family has quantile density <span class="math inline">\(Q&#39;(u) = \sigma[1 + \sum_k c_k
+P_k(u)]_+\)</span> with <span class="math inline">\(P_k\)</span> the
+shifted Legendre polynomials.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">arcq</span>(<span class="at">coef =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.3</span>), <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">arclength</span>(o)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; [1] 1.43581</span></span></code></pre></div>
+<p>Arc length is a <em>shape</em> functional, so shifting the
+distribution cannot change it:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">c</span>(<span class="at">at_zero =</span> <span class="fu">arclength</span>(<span class="fu">arcq</span>(<span class="fl">0.5</span>, <span class="at">mu =</span> <span class="dv">0</span>)), <span class="at">at_seventeen =</span> <span class="fu">arclength</span>(<span class="fu">arcq</span>(<span class="fl">0.5</span>, <span class="at">mu =</span> <span class="dv">17</span>)))</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt;      at_zero at_seventeen </span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt;     1.429349     1.429349</span></span></code></pre></div>
+<p>The integrand is analytic on <span class="math inline">\([0,1]\)</span>, so Gauss-Legendre converges
+geometrically. Sixteen nodes already reach machine precision, where the
+equally spaced grid it replaced converges linearly:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">vapply</span>(<span class="fu">c</span>(<span class="dv">8</span><span class="dt">L</span>, <span class="dv">16</span><span class="dt">L</span>, <span class="dv">32</span><span class="dt">L</span>, <span class="dv">64</span><span class="dt">L</span>), <span class="cf">function</span>(k) <span class="fu">arclength</span>(o, <span class="at">nodes =</span> k), <span class="dv">0</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; [1] 1.43581 1.43581 1.43581 1.43581</span></span></code></pre></div>
+<p>The integral is generally not elementary. With <span class="math inline">\(Q&#39;\)</span> of degree one the antiderivative
+is an inverse hyperbolic sine; with <span class="math inline">\(Q&#39;\)</span> of degree two it is an elliptic
+integral, which by Liouville’s theorem has no elementary antiderivative;
+beyond that it is hyperelliptic.</p>
+</div>
+<div id="goodness-of-fit" class="section level2">
+<h2>Goodness of fit</h2>
+<p>Under the null the probability integral transform is uniform, and the
+arc length of the resulting probability plot has a known distribution
+with an analytic saddlepoint tail. The test is powerful against local
+density structure — multimodality, clustering, heaping — and weak
+against smooth location and scale departures, which is the opposite of
+the empirical-distribution tests.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">al_test</span>(<span class="fu">runif</span>(<span class="dv">200</span>))<span class="sc">$</span>p.value                       <span class="co"># null holds</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.3974529</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">al_test</span>(<span class="fu">c</span>(<span class="fu">runif</span>(<span class="dv">100</span>), <span class="fu">rbeta</span>(<span class="dv">100</span>, <span class="dv">8</span>, <span class="dv">8</span>)))<span class="sc">$</span>p.value  <span class="co"># a clustered middle</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; [1] 0.0002620575</span></span></code></pre></div>
+</div>
+<div id="characteristic-function-arc-length" class="section level2">
+<h2>Characteristic-function arc length</h2>
+<p>The same functional applied to the characteristic-function curve is
+scale free, and it has closed forms for several families. Two of them
+anchor the whole construction:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">c</span>(<span class="at">normal =</span> <span class="fu">cf_arclength_family</span>(<span class="st">&quot;normal&quot;</span>),</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="at">exponential =</span> <span class="fu">cf_arclength_family</span>(<span class="st">&quot;exponential&quot;</span>, <span class="at">lambda =</span> <span class="dv">1</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">pi =</span> pi)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt;      normal exponential          pi </span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;    2.000000    3.141593    3.141593</span></span></code></pre></div>
+<p>A symmetric monotone (Polya) law carries the value two, and the
+exponential carries <span class="math inline">\(\pi\)</span> exactly.
+Because total arc length is scale free, the exponential rate cannot
+matter:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">c</span>(<span class="at">rate_1 =</span> <span class="fu">cf_arclength_family</span>(<span class="st">&quot;exponential&quot;</span>, <span class="at">lambda =</span> <span class="dv">1</span>),</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="at">rate_2 =</span> <span class="fu">cf_arclength_family</span>(<span class="st">&quot;exponential&quot;</span>, <span class="at">lambda =</span> <span class="dv">2</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt;   rate_1   rate_2 </span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; 3.141593 3.141593</span></span></code></pre></div>
+<p>The empirical version approaches the theoretical one on a large
+sample:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">cf_arclength</span>(<span class="fu">rnorm</span>(<span class="dv">50000</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; [1] 2.013334</span></span></code></pre></div>
+</div>
+<div id="the-equivalence-family" class="section level2">
+<h2>The equivalence family</h2>
+<p>A separate strand asks when two readings of a curve agree. The
+shoulder of a quantile density solves <span class="math inline">\(3q&#39;^2 = q q&#39;&#39;\)</span>, transcendental
+in general. On the two-exponent family <span class="math inline">\(q(u)
+= u^{\alpha}(1-u)^{\beta}\)</span> it collapses to a quadratic, so the
+shoulder is available in closed form, and the returned root satisfies
+the <em>original</em> equation:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>al <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.60</span>; be <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.35</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>ub <span class="ot">&lt;-</span> <span class="fu">eq_ub_quad</span>(al, be)[<span class="dv">1</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>gp  <span class="ot">&lt;-</span> al <span class="sc">/</span> ub <span class="sc">-</span> be <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> ub)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>gpp <span class="ot">&lt;-</span> <span class="sc">-</span>al <span class="sc">/</span> ub<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> be <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> ub)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">c</span>(<span class="at">shoulder =</span> ub, <span class="at">residual_of_original_equation =</span> <span class="fu">abs</span>(<span class="dv">2</span> <span class="sc">*</span> gp<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> gpp))</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt;                      shoulder residual_of_original_equation </span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt;                     0.1231096                     0.0000000</span></span></code></pre></div>
+<p>Equivalence itself is the vanishing of a closed-form discrepancy, and
+the solution curve is increasing in <span class="math inline">\(\alpha\)</span>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>als <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.62</span>, <span class="sc">-</span><span class="fl">0.54</span>, <span class="at">by =</span> <span class="fl">0.02</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>bss <span class="ot">&lt;-</span> <span class="fu">vapply</span>(als, eq_bstar, <span class="dv">0</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">alpha =</span> als, <span class="at">beta_star =</span> <span class="fu">round</span>(bss, <span class="dv">6</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt;                [,1]      [,2]      [,3]      [,4]      [,5]</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; alpha     -0.620000 -0.600000 -0.580000 -0.560000 -0.540000</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; beta_star -0.578076 -0.378118 -0.243343 -0.148972 -0.081551</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="fu">c</span>(<span class="at">discrepancy_on_the_curve =</span> <span class="fu">eq_E</span>(<span class="sc">-</span><span class="fl">0.60</span>, <span class="fu">eq_bstar</span>(<span class="sc">-</span><span class="fl">0.60</span>)))</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; discrepancy_on_the_curve </span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt;             6.661338e-16</span></span></code></pre></div>
+</div>
+<div id="l-moments" class="section level2">
+<h2>L-moments</h2>
+<p>Population and sample L-moments are included, since the families
+above are estimated by matching them. A uniform grid has first L-moment
+<span class="math inline">\(1/2\)</span> and L-scale <span class="math inline">\(1/6\)</span> exactly:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>u <span class="ot">&lt;-</span> (<span class="fu">seq_len</span>(<span class="dv">20000</span>) <span class="sc">-</span> <span class="fl">0.5</span>) <span class="sc">/</span> <span class="dv">20000</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">sample_lmoments</span>(u, <span class="dv">4</span><span class="dt">L</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt; [1] 0.500000 0.166675</span></span></code></pre></div>
+</div>
+<div id="implementation" class="section level2">
+<h2>Implementation</h2>
+<p>The numerical primitives run in a shared C back-end that is also
+bound from Python, and the two front ends are checked against each other
+value by value.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
