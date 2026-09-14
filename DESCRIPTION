@@ -2,7 +2,7 @@ Package: arcstat
 Type: Package
 Title: Arc-Length Statistics: Goodness of Fit, Distributions and a
         Bayesian Test
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: person("M. Theodor", "Loots", role = c("aut", "cre"), email = "theo.loots@gmail.com",
                     comment = c(ORCID = "0000-0001-7722-3913"))
 Description: Inference from the arc length of statistical functions. Three tools share one pure-C
@@ -22,9 +22,9 @@ Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Suggests: MASS, knitr, rmarkdown, testthat (>= 3.0.0)
 VignetteBuilder: knitr
-Packaged: 2026-08-31 19:10:05 UTC; home
+Packaged: 2026-09-11 18:48:59 UTC; home
 Author: M. Theodor Loots [aut, cre] (ORCID:
     <https://orcid.org/0000-0001-7722-3913>)
 Maintainer: M. Theodor Loots <theo.loots@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-09-11 14:30:13 UTC
+Date/Publication: 2026-09-14 08:50:09 UTC
