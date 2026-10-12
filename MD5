@@ -1,8 +1,8 @@
-de10402ac21a6fadd26feadc6175a818 *DESCRIPTION
+54df123b9a0b3d8022e6443efbe6e9b4 *DESCRIPTION
 50610ce613f14a6f1aa5ee7ad9f9c0b3 *NAMESPACE
-14858eb72a8dfa6cd0c129a99cd54807 *NEWS.md
+0d7e52471d6665bc86e60417999b6172 *NEWS.md
 05d94533275e10fd4c006d29525480f4 *R/arcstat.R
-a5a4d50d727ff767ad814b51b34ef2d6 *README.md
+5b92b4299192a398e323d9cb3c1b83e3 *README.md
 54f805caf0e0234c32b2b14c0f2ff189 *build/vignette.rds
 751cd2fec5d40cfb2b9bc84f58980ef0 *inst/doc/arcstat.R
 273c4b4c59d879cf615eeead381d6853 *inst/doc/arcstat.Rmd
@@ -72,7 +72,7 @@ ba341c4f6519a1839f0b09f9feca225a *src/arceq2.h
 d61b1ccaf5731f60bb9fbc869a6b3396 *src/arck4.c
 73443b0571348d9d1ae5c32092111794 *src/arck4.h
 723355e518fea661ac0ae82406779716 *src/arck4fit.c
-37a52ea5068b15725b8faec275650e9f *src/arclen.c
+b869faa3c6175ad48fe7b32eb538bf6d *src/arclen.c
 1c8ba268293c2301c74a46e62dad73f9 *src/arclen.h
 1f1c95aba8d27bc9c1eb852aa8d2e1c8 *src/arcmv.c
 d6602bb792e090760d78d1212dce497b *src/arcvc.c
@@ -85,7 +85,7 @@ b042e1231e68f8667400d0c62b002a0c *src/arcvc.h
 bcbcdf0a52381340de3edf5f8cd95390 *tests/testthat.R
 b3d938037a853059393622c8ecff701b *tests/testthat/test-arceq2.R
 9bbf2ae2f9428275e1af472a6dc414ee *tests/testthat/test-arck4.R
-69467169b69ba00c22971af04f79a836 *tests/testthat/test-arclen.R
+c6f1f3aa3c783b80788fe6caf2136b48 *tests/testthat/test-arclen.R
 f3efa324dd3a9135545185600339cb96 *tests/testthat/test-backends.R
 69891e7565ca09a6bbd7a838f18a8bed *tests/testthat/test-core.R
 ece57781e5b8cea137fa8b292a09fbd0 *tests/testthat/test-families.R
